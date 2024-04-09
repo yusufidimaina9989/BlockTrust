@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs'
-import { Landregistry } from '../src/contracts/landregistry'
+import { ManageInspectors } from '../src/contracts/manageInspectors'
 import { privateKey } from './privateKey'
-import { bsv, TestWallet, DefaultProvider, sha256 } from 'scrypt-ts'
+import { bsv, TestWallet, DefaultProvider, sha256, Addr } from 'scrypt-ts'
 
 function getScriptHash(scriptPubKeyHex: string) {
     const res = sha256(scriptPubKeyHex).match(/.{2}/g)
@@ -12,7 +12,7 @@ function getScriptHash(scriptPubKeyHex: string) {
 }
 
 async function main() {
-    await Landregistry.loadArtifact()
+    await ManageInspectors.loadArtifact()
 
     // Prepare signer. 
     // See https://scrypt.io/docs/how-to-deploy-and-call-a-contract/#prepare-a-signer-and-provider
@@ -20,13 +20,10 @@ async function main() {
         network: bsv.Networks.testnet
     }))
 
-    // TODO: Adjust the amount of satoshis locked in the smart contract:
-    const amount = 100
+    // Adjust the amount of satoshis locked in the smart contract:
+    const amount = 1
 
-    const instance = new Landregistry(
-        // TODO: Pass constructor parameter values.
-        0n
-    )
+    const instance = new ManageInspectors()
 
     // Connect to a signer.
     await instance.connect(signer)
@@ -39,7 +36,7 @@ async function main() {
     const shFile = `.scriptHash`;
     writeFileSync(shFile, scriptHash);
 
-    console.log('Landregistry contract was successfully deployed!')
+    console.log('OrdinalMarketplaceApp contract was successfully deployed!')
     console.log(`TXID: ${deployTx.id}`)
     console.log(`scriptHash: ${scriptHash}`)
 }
