@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# Getting Started with BlockTrust
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Forked the github repo,
+then install `scrypt-cli` by running : `npx scrypt-cli init`
+
+also install `scrypt-ord` : `npm i scrypt-ord`
+
+then `material-ui` and `icons` :
+`npm install @mui/material @emotion/react @emotion/styled`,
+
+`npm install @mui/icons-material @mui/material @emotion/styled @emotion/react` respectively.
 
 ## Available Scripts
 
